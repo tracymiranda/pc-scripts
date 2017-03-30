@@ -264,11 +264,11 @@ class Submissions:
         considered = set([])
         for s in self.subs:
             for (dst, label) in s.connections:
-              l = sorted([s.id, dst.id])
-              t = (l[0], l[1])
-              if not t in considered:
-                  considered.add(t)
-                  e.append((s, dst, label))
+                l = sorted([s.id, dst.id])
+                t = (l[0], l[1])
+                if not t in considered:
+                    considered.add(t)
+                    e.append((s, dst, label))
 
         return e
 
