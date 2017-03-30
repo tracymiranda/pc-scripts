@@ -76,6 +76,12 @@ class Submissions:
 
     def tutorials(self):
         return Submissions(filter(lambda s: s.session == 'Tutorial [4 hours]', self.subs))
+    
+    def ignite(self):
+        return Submissions(filter(lambda s: s.session in ['Ignite (5 minutes)'], self.subs))   
+    
+    def showtime_demo(self):
+        return Submissions(filter(lambda s: s.session in ['Showtime Demo'], self.subs))           
 
     def standard(self):
         return Submissions(filter(lambda s: s.session in ['Standard [35 minutes]'], self.subs))
