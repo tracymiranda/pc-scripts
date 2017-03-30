@@ -1,7 +1,7 @@
 from report import *
 
 def show_track_count(S):
-    print "Track Count".ljust(40) + "\t\tSubmission Count"
+    print "Standard Track Count".ljust(40) + "\t\tSubmission Count"
     
     items = S.track_count().items()
     total = sum([count for (track, count) in items])
@@ -12,5 +12,5 @@ def show_track_count(S):
 
 if __name__ == "__main__":
 #    S = ALL.standard().vote_cutoff(4.0)
-    S = ALL.standard() #.filter(lambda s: s.accepted)
+    S = ALL.standard()#.filter(lambda s: s.accepted)
     show_track_count(S)
