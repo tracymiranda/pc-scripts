@@ -11,9 +11,9 @@ def custom_filter(S):
     S = S.filter(lambda s: not s.accepted)
 
     # Half talks
-    #S = S.filter(lambda s: "half" in s.tags or "+C" in s.tags)
-    #S = S.filter(lambda s: "+n" in s.tags)
-    #S = S.filter(lambda s: "+p" in s.tags)
+    # S = S.filter(lambda s: "half" in s.tags or "+C" in s.tags)
+    # S = S.filter(lambda s: "+n" in s.tags)
+    # S = S.filter(lambda s: "+p" in s.tags)
 
     return S
 
@@ -291,14 +291,14 @@ if __name__ == "__main__":
 
     # If we returned results, potentially do things to them
     if S:
-      # Perform any actions
-      if args.all or (len(S.subs) < 10 and not args.report):
-          print_subs(S)
-      else:
-          print_summary(S, args.min)
+        # Perform any actions
+        if args.all or (len(S.subs) < 10 and not args.report):
+            print_subs(S)
+        else:
+            print_summary(S, args.min)
 
-      if args.save:
-          S.save_subs(args.save)
+        if args.save:
+            S.save_subs(args.save)
 
-      if args.open:
-          S.open_links(args.force)
+        if args.open:
+            S.open_links(args.force)
