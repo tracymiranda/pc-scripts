@@ -120,29 +120,6 @@ def add_projects_command(subparsers):
     parser_project = subparsers.add_parser("projects")
     parser_project.set_defaults(func=run)
 
-def add_language_command(subparsers):
-    def run(S, args):
-        languages = args.languages
-        merged = Submissions([])
-        for language in languages:
-            merged = merged.union(S.find_language(language))
-        return merged
-    parser_language = subparsers.add_parser("language")
-    parser_language.add_argument('languages', metavar='LANGUAGES', nargs='+',
-                   help='Languages to query')
-    parser_language.set_defaults(func=run)
-
-def add_languages_command(subparsers):
-    def run(S, args):
-        print "Language      \t\tSubmission Count"
-
-        for (language, count) in S.language_count().items():
-            if language:
-                print "%s\t\t%s" % (language.ljust(20), count)
-
-    parser_language = subparsers.add_parser("languages")
-    parser_language.set_defaults(func=run)
-
 def add_track_command(subparsers):
     def run(S, args):
         tracks = args.tracks
@@ -236,8 +213,7 @@ if __name__ == "__main__":
     parser.add_argument('-a', "--all", action='store_true', help="Print each individual submission results (default for under 10 results).")
     parser.add_argument('-r', "--report", action='store_true', help="Print summary report (default for 10 or more results).")
     parser.add_argument('-t', "--tutorials", action='store_true', help="Show tutorials instead of standard talks.")
-    parser.add_argument('-p', "--poc", action='store_true', help="Filter for isPOC.")
-    parser.add_argument('-w', "--woman", action='store_true', help="Filter for isWoman.")
+    parser.add_argument('-n', "--new", action='store_true', help="Filter for isNew new speakers.")
     parser.add_argument("--custom", action='store_true', help="Custom filter.")
 
     subparsers = parser.add_subparsers()
@@ -249,8 +225,6 @@ if __name__ == "__main__":
     add_tags_command(subparsers)
     add_project_command(subparsers)
     add_projects_command(subparsers)
-    add_language_command(subparsers)
-    add_languages_command(subparsers)
     add_track_command(subparsers)
     add_tracks_command(subparsers)
     add_company_command(subparsers)
@@ -275,11 +249,8 @@ if __name__ == "__main__":
         S = filter_min_vote(S, args.min)
         S = filter_max_vote(S, args.max)
 
-    if args.poc:
-        S = S.filter(lambda x: x.isPOC)
-
-    if args.woman:
-        S = S.filter(lambda x: x.isWoman)
+    if args.new:
+        S = S.filter(lambda x: x.isNew)
 
     if args.accepted:
         S = S.filter(lambda s: s.accepted)

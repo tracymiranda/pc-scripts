@@ -59,11 +59,8 @@ class Submissions:
 #     def tag_count(self):
 #         return len(set(tag_count().keys()))
 
-    def woman_speakers(self):
-        return len(filter(lambda s: s.isWoman, self.subs))
-
-    def poc_speakers(self):
-        return len(filter(lambda s: s.isPOC, self.subs))
+    def new_speakers(self):
+        return len(filter(lambda s: s.isNew, self.subs))
 
     def no_psql(self):
         return Submissions(filter(lambda s: not s.isPsql, self.subs))
@@ -134,18 +131,6 @@ class Submissions:
             groups[project] += 1
         return groups
 
-    def language_count(self):
-        languages = []
-        for sub in self.subs:
-            languages += sub.languages
-
-        groups = { }
-        for language in languages:
-            if not language in groups:
-                groups[language] = 0
-            groups[language] += 1
-        return groups
-
     def company_count(self):
         companies = []
         for sub in self.subs:
@@ -213,9 +198,6 @@ class Submissions:
     def find_project(self, project):
         return Submissions(filter(lambda s: project in s.projects, self.subs))
 
-    def find_language(self, language):
-        return Submissions(filter(lambda s: language in s.languages, self.subs))
-
     def links(self):
         links = []
         for s in self.subs:
@@ -244,12 +226,10 @@ class Submissions:
             print " Project: %s" % ', '.join(s.projects)
             print " Speaker: %s" % ', '.join(s.speakers)
             print "    Link: %s" % s.link
-            print "       W: %s" % s.isWoman
-            print "     POC: %s" % s.isPOC
+            print "  Is New: %s" % s.isNew
             print "    Tags: %s" % ' '.join(s.tags)
             print "      ID: %s" % s.id
             print
-#        print "Total: %d  (%d woman)" % (self.size, len(filter(lambda s: s.isWoman, self.subs)))
         print "Total: %d" % self.size
 
     def print_links(self):
@@ -417,18 +397,9 @@ class Submission:
 
         tags = filter(lambda tag: not tag.startswith("project:"), tags)
 
-        # Language
-        language_tags = filter(lambda tag: tag.startswith("language:"), tags)
-        self.languages = map(lambda tag: tag.split(':')[1], language_tags)
-
-        tags = filter(lambda tag: not tag.startswith("language:"), tags)
-
-        self.isWoman = "femalespeaker" in tags or "womanspeaker" in tags
-        tags = filter(lambda tag: tag != "womanspeaker", tags)
-        tags = filter(lambda tag: tag != "femalespeaker", tags)
-
-        self.isPOC = "poc" in tags
-        tags = filter(lambda tag: tag != "poc", tags)
+        self.isNew = "newspeaker" in tags or "new" in tags
+        tags = filter(lambda tag: tag != "newspeaker", tags)
+        tags = filter(lambda tag: tag != "new", tags)
 
         self.isDuplicate = "duplicate" in tags
         tags = filter(lambda tag: tag != "duplicate", tags)
@@ -504,8 +475,7 @@ def save_links(S):
 
 def show_header(S, min_vote = 0):
     print "%d submissions at or above %f average." % (len(S.subs), min_vote)
-    print "%d of which are from woman speakers." % (S.woman_speakers())
-    print "%d of which are from poc speakers." % (S.poc_speakers())
+    print "%d of which are from new speakers." % (S.new_speakers())
 
 
 submissions_path = 'submissions.csv'
