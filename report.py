@@ -56,8 +56,8 @@ class Submissions:
         self.tags = list(set([tag for s in self.subs for tag in s.tags]))
         self.size = len(self.subs)
 
-    def tag_count(self):
-        return len(set(tag_count().keys()))
+#     def tag_count(self):
+#         return len(set(tag_count().keys()))
 
     def woman_speakers(self):
         return len(filter(lambda s: s.isWoman, self.subs))
