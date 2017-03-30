@@ -350,8 +350,10 @@ class Submission:
         self.session = fields['Session Type'].strip()
         self.track = fields['Track'].strip()
         self.body = fields['Body'].strip()
+        raw_speakers = fields['Speaker(s)']
+        raw_speakers = raw_speakers.replace('),', ')|')
         self.speakers = filter(lambda s: not (']' in s and not '[' in s),
-                               map(lambda x: x.strip(), fields['Speaker(s)'].split(',')))
+                               map(lambda x: x.strip(), raw_speakers.split('|')))
         self.status = fields['Status'].strip()
         self.level = fields['Experience level'].strip()
         self.average = float(fields['AVG'].split('/')[0].strip())
