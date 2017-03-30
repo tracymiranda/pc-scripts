@@ -70,9 +70,6 @@ class Submissions:
 
     def count_cutoff(self, min_count):
         return self.filter(lambda s: s.count >= min_count)
-
-    def tutorials(self):
-        return Submissions(filter(lambda s: s.session == 'Tutorial [4 hours]', self.subs))
     
     def ignite(self):
         return Submissions(filter(lambda s: s.session in ['Ignite (5 minutes)'], self.subs))   
