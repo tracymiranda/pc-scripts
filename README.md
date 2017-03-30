@@ -5,11 +5,13 @@ This version is adapted for processing proposals for EclipseCon France 2017
 
 Pre-requisites
 ---------------
-* Python 3.6.0(or higher) installed and runnable from the path
+* Python 2.7(or higher) installed and runnable from the path
 
 To Run
 --------------
-CSV data can be downloaded manually from the Conference website `Administer Sessions` page.
+CSV data can be downloaded manually from the Conference website `Administer Sessions` page (login required)
+1. https://www.eclipsecon.org/france2017/pc-admin/sessions/eclipsecon-admin-unprocessed.csv (download as submissions.csv)
+2. https://www.eclipsecon.org/france2017/community-voting/report.csv (download as community-votes.csv)
 Or alternatively you can modify `dl.py` and save off your PC credentials locally. 
 
 `report.py` is the main "library" behind the other scripts.
