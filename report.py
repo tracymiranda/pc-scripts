@@ -515,13 +515,6 @@ index = { }
 for s in ALL.subs:
     index[s.id] = s
 
-def connect_subs(subs, label):
-    for src in subs:
-        for dst in subs:
-            if src != dst:
-                src.connections.append( (dst, label) )
-                dst.connections.append( (src, label) )
-
 def load_db():
     # Fill in edges
     conn = sqlite3.connect('program.db')
@@ -535,7 +528,7 @@ def load_db():
     # for src in c.execute("SELECT * FROM accepted"):
     #     index[src[0]].accepted = True
 
-load_db()
+#load_db()
 
 S = ALL.standard()#.filter(lambda s: s.accepted)
 
