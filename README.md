@@ -9,10 +9,9 @@ Pre-requisites
 
 To Run
 --------------
-The scripts require two CSV files locally to run. CSV data can be downloaded manually from the Conference website `Administer Sessions` page (login required)
+The scripts require two CSV files locally to run. CSV data can be downloaded manually from the Conference website `Administer Sessions` page (login required). Or alternatively you can modify `dl.py` and save off your PC credentials locally.
 * https://www.eclipsecon.org/france2017/pc-admin/sessions/eclipsecon-admin-unprocessed.csv (download as submissions.csv)
 * https://www.eclipsecon.org/france2017/community-voting/report.csv (download as community-votes.csv)
-Or alternatively you can modify `dl.py` and save off your PC credentials locally. 
 
 `report.py` is the main "library" behind the other scripts. There are lots of individual scripts for now, e.g.
 * `show_track.py` shows the number of submitted talks per track
